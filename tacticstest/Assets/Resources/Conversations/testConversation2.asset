@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f12707055f83e154d9fd1b46dc4cf44f, type: 3}
+  m_Name: testConversation2
+  m_EditorClassIdentifier: 
+  list:
+  - messages:
+    - Hmm. I sense an unsavory presence nearby.
+    - Yes...
+    - You there, show yourself!
+    speaker: {fileID: 21300000, guid: 2a51e3845e219984abacb14a4c4cd6d8, type: 3}
+    anchor: 6
+  - messages:
+    - You're pretty perceptive for an old man.
+    - You know why I'm here. Hand it over and I'll let you leave in one piece.
+    speaker: {fileID: 21300000, guid: 7fd14989ac1d03d4888a09d892053dda, type: 3}
+    anchor: 8
+  - messages:
+    - Bah, just another fool brigand come to stand in my way.
+    - Come then, see just how close you can get before my magic tears you asunder!
+    speaker: {fileID: 21300000, guid: 2a51e3845e219984abacb14a4c4cd6d8, type: 3}
+    anchor: 6

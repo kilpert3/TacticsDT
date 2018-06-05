@@ -1,0 +1,4 @@
+sceneSetups:
+- path: Assets/Scenes/experience gain test.unity
+  isLoaded: 1
+  isActive: 1
