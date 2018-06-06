@@ -93,6 +93,7 @@
     <Compile Include="Assets\Scripts\Controller\InputController.cs" />
     <Compile Include="Assets\Scripts\demo.cs" />
     <Compile Include="Assets\Scripts\Enums\Directions.cs" />
+    <Compile Include="Assets\Scripts\Enums\EquipSlots.cs" />
     <Compile Include="Assets\Scripts\Enums\StatTypes.cs" />
     <Compile Include="Assets\Scripts\EventArgs\InfoEventArgs.cs" />
     <Compile Include="Assets\Scripts\Exceptions\BaseException.cs" />
@@ -116,24 +117,31 @@
     <Compile Include="Assets\Scripts\Notification Center\NotificationExtensions.cs" />
     <Compile Include="Assets\Scripts\PanelTests.cs" />
     <Compile Include="Assets\Scripts\PreProduction\BoardCreator.cs" />
+    <Compile Include="Assets\Scripts\TestItems.cs" />
     <Compile Include="Assets\Scripts\TestLevelGrowth.cs" />
     <Compile Include="Assets\Scripts\ViewModel Component\AbilityMenuEntry.cs" />
+    <Compile Include="Assets\Scripts\ViewModel Component\Actor\Equipment.cs" />
     <Compile Include="Assets\Scripts\ViewModel Component\Actor\Rank.cs" />
     <Compile Include="Assets\Scripts\ViewModel Component\Actor\Stats.cs" />
     <Compile Include="Assets\Scripts\ViewModel Component\Board.cs" />
     <Compile Include="Assets\Scripts\ViewModel Component\CameraRig.cs" />
     <Compile Include="Assets\Scripts\ViewModel Component\ConversationPanel.cs" />
+    <Compile Include="Assets\Scripts\ViewModel Component\Features\Feature.cs" />
+    <Compile Include="Assets\Scripts\ViewModel Component\Features\StatModifierFeature.cs" />
+    <Compile Include="Assets\Scripts\ViewModel Component\Item\Consumable.cs" />
+    <Compile Include="Assets\Scripts\ViewModel Component\Item\Equippable.cs" />
+    <Compile Include="Assets\Scripts\ViewModel Component\Item\Merchandise.cs" />
     <Compile Include="Assets\Scripts\ViewModel Component\Movement\FlyMovement.cs" />
     <Compile Include="Assets\Scripts\ViewModel Component\Movement\Movement.cs" />
     <Compile Include="Assets\Scripts\ViewModel Component\Movement\TeleportMovement.cs" />
     <Compile Include="Assets\Scripts\ViewModel Component\Movement\WalkMovement.cs" />
     <Compile Include="Assets\Scripts\ViewModel Component\Tile.cs" />
     <Compile Include="Assets\Scripts\ViewModel Component\Unit.cs" />
-    <Reference Include="Unity.PackageManagerUI.Editor">
-      <HintPath>C:/Users/kilpe/OneDrive/Documents/tacticstest/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEditor.StandardEvents">
-      <HintPath>C:/Users/kilpe/OneDrive/Documents/tacticstest/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
+      <HintPath>C:/Users/kilpe/OneDrive/Documents/TacticsDT/tacticstest/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.PackageManagerUI.Editor">
+      <HintPath>C:/Users/kilpe/OneDrive/Documents/TacticsDT/tacticstest/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
