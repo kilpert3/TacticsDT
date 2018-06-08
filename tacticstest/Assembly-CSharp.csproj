@@ -121,6 +121,7 @@
     <Compile Include="Assets\Scripts\TestLevelGrowth.cs" />
     <Compile Include="Assets\Scripts\ViewModel Component\AbilityMenuEntry.cs" />
     <Compile Include="Assets\Scripts\ViewModel Component\Actor\Equipment.cs" />
+    <Compile Include="Assets\Scripts\ViewModel Component\Actor\Job.cs" />
     <Compile Include="Assets\Scripts\ViewModel Component\Actor\Rank.cs" />
     <Compile Include="Assets\Scripts\ViewModel Component\Actor\Stats.cs" />
     <Compile Include="Assets\Scripts\ViewModel Component\Board.cs" />

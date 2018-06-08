@@ -5,15 +5,18 @@ using System;
 
 public abstract class Movement : MonoBehaviour
 {
-    public int range;
-    public int jumpHeight;
+    public int range { get { return stats[StatTypes.MOV]; } }
+    public int jumpHeight { get { return stats[StatTypes.JMP]; } }
+    protected Stats stats;
     protected Unit unit;
     protected Transform jumper;
 
+    //get references to stats and jumper 
     protected virtual void Awake()
     {
         unit = GetComponent<Unit>();
         jumper = transform.Find("Jumper");
+        stats = GetComponent<Stats>();
     }
 
     //personal search criteria for pathfinding
