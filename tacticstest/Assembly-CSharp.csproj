@@ -91,6 +91,7 @@
     <Compile Include="Assets\Scripts\Controller\ExperienceManager.cs" />
     <Compile Include="Assets\Scripts\Controller\GameObjectPoolController.cs" />
     <Compile Include="Assets\Scripts\Controller\InputController.cs" />
+    <Compile Include="Assets\Scripts\Controller\StatPanelController.cs" />
     <Compile Include="Assets\Scripts\demo.cs" />
     <Compile Include="Assets\Scripts\Enums\Directions.cs" />
     <Compile Include="Assets\Scripts\Enums\EquipSlots.cs" />
@@ -136,6 +137,7 @@
     <Compile Include="Assets\Scripts\ViewModel Component\Movement\Movement.cs" />
     <Compile Include="Assets\Scripts\ViewModel Component\Movement\TeleportMovement.cs" />
     <Compile Include="Assets\Scripts\ViewModel Component\Movement\WalkMovement.cs" />
+    <Compile Include="Assets\Scripts\ViewModel Component\StatPanel.cs" />
     <Compile Include="Assets\Scripts\ViewModel Component\Tile.cs" />
     <Compile Include="Assets\Scripts\ViewModel Component\Unit.cs" />
     <Reference Include="UnityEditor.StandardEvents">

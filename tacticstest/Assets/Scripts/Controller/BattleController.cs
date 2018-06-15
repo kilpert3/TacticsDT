@@ -13,6 +13,7 @@ public class BattleController : StateMachine
     public AbilityMenuPanelController abilityMenuPanelController;
     public Turn turn = new Turn();
     public List<Unit> units = new List<Unit>();
+    public StatPanelController statPanelController;
 
     //PROTOTYPE ONLY (actual models thru resources.load())
     public GameObject heroPrefab;

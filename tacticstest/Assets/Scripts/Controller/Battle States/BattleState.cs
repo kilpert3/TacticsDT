@@ -51,4 +51,33 @@ public abstract class BattleState : State
         tileSelectionIndicator.localPosition = board.tiles[p].center;
     }
 
+    //convenience property wrapper (directly reference stat panel from subclasses)
+    public StatPanelController statPanelController { get { return owner.statPanelController; } }
+
+    //get unit from board position
+    protected virtual Unit GetUnit(Point p)
+    {
+        Tile t = board.GetTile(p);
+        GameObject content = t != null ? t.content : null;
+        return content != null ? content.GetComponent<Unit>() : null;
+    }
+
+    //show or hide stat panel when needed
+    protected virtual void RefreshPrimaryStatPanel(Point p)
+    {
+        Unit target = GetUnit(p);
+        if (target != null)
+            statPanelController.ShowPrimary(target.gameObject);
+        else
+            statPanelController.HidePrimary();
+    }
+
+    protected virtual void RefreshSecondaryStatPanel(Point p)
+    {
+        Unit target = GetUnit(p);
+        if (target != null)
+            statPanelController.ShowSecondary(target.gameObject);
+        else
+            statPanelController.HideSecondary();
+    }
 }
