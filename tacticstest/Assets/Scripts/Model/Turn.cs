@@ -4,12 +4,19 @@ using System.Collections.Generic;
 
 public class Turn
 {
-    public Unit actor;
+    public Unit actor; //the selected unit
+
+    //allow for undo move action
     public bool hasUnitMoved;
     public bool hasUnitActed;
-    public bool lockMove;
+    public bool lockMove; 
+
+    //initial tile and direction facing
     Tile startTile;
     Directions startDir;
+
+    public GameObject ability; //the selected ability
+    public List<Tile> targets; //list of targets within ability range
 
     public void Change(Unit current)
     {

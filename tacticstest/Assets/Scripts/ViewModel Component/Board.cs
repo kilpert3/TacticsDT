@@ -12,6 +12,12 @@ public class Board : MonoBehaviour
     Color selectedTileColor = new Color(0, 1, 1, 1);
     Color defaultTileColor = new Color(1, 1, 1, 1);
 
+    //bounding area
+    public Point min { get { return _min; } }
+    public Point max { get { return _max; } }
+    Point _min;
+    Point _max;
+
     //cardinal direction points for easy reference
     Point[] dirs = new Point[4]
     {
@@ -23,12 +29,21 @@ public class Board : MonoBehaviour
 
     public void Load(LevelData data)
     {
+        _min = new Point(int.MaxValue, int.MaxValue);
+        _max = new Point(int.MinValue, int.MinValue);
+
         for (int i = 0; i < data.tiles.Count; ++i)
         {
             GameObject instance = Instantiate(tilePrefab) as GameObject;
             Tile t = instance.GetComponent<Tile>();
             t.Load(data.tiles[i]);
             tiles.Add(t.pos, t);
+
+            //update bounding area
+            _min.x = Mathf.Min(_min.x, t.pos.x);
+            _min.y = Mathf.Min(_min.y, t.pos.y);
+            _max.x = Mathf.Max(_max.x, t.pos.x);
+            _max.y = Mathf.Max(_max.y, t.pos.y);
         }
     }
 
