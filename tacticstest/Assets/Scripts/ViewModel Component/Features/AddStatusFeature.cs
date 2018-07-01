@@ -1,0 +1,24 @@
+﻿using UnityEngine;
+using System.Collections;
+
+//status effects treated like equipment
+public abstract class AddStatusFeature<T> : Feature where T : StatusEffect
+{
+    #region Fields
+    StatusCondition statusCondition;
+    #endregion
+
+    #region Protected
+    protected override void OnApply()
+    {
+        Status status = GetComponentInParent<Status>();
+        statusCondition = status.Add<T, StatusCondition>();
+    }
+
+    protected override void OnRemove()
+    {
+        if (statusCondition != null)
+            statusCondition.Remove();
+    }
+    #endregion
+}

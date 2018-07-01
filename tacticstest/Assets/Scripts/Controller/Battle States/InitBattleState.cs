@@ -18,6 +18,7 @@ public class InitBattleState : BattleState
         SpawnTestUnits(); //  PROTOTYPE
         yield return null;
         owner.ChangeState<CutSceneState>(); // This is changed for prototyping
+        owner.round = owner.gameObject.AddComponent<TurnOrderController>().Round();
     }
 
     //PROTOTYPE ONLY

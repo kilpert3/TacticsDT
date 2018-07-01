@@ -3,19 +3,23 @@ using System.Collections;
 
 public class SelectUnitState : BattleState
 {
-    int index = -1;
-
     public override void Enter()
     {
         base.Enter();
         StartCoroutine("ChangeCurrentUnit");
     }
 
-    //cycle unit turns one by one
+    public override void Exit()
+    {
+        base.Exit();
+        statPanelController.HidePrimary();
+    }
+
     IEnumerator ChangeCurrentUnit()
     {
-        index = (index + 1) % units.Count;
-        turn.Change(units[index]);
+        owner.round.MoveNext();
+        SelectTile(turn.actor.tile.pos);
+        RefreshPrimaryStatPanel(pos);
         yield return null;
         owner.ChangeState<CommandSelectionState>();
     }

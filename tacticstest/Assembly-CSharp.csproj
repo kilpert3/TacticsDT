@@ -96,6 +96,7 @@
     <Compile Include="Assets\Scripts\Controller\GameObjectPoolController.cs" />
     <Compile Include="Assets\Scripts\Controller\InputController.cs" />
     <Compile Include="Assets\Scripts\Controller\StatPanelController.cs" />
+    <Compile Include="Assets\Scripts\Controller\TurnOrderController.cs" />
     <Compile Include="Assets\Scripts\demo.cs" />
     <Compile Include="Assets\Scripts\Enums\Directions.cs" />
     <Compile Include="Assets\Scripts\Enums\EquipSlots.cs" />
@@ -107,10 +108,12 @@
     <Compile Include="Assets\Scripts\Exceptions\Modifiers\ClampValueModifier.cs" />
     <Compile Include="Assets\Scripts\Exceptions\Modifiers\MaxValueModifier.cs" />
     <Compile Include="Assets\Scripts\Exceptions\Modifiers\MinValueModifier.cs" />
+    <Compile Include="Assets\Scripts\Exceptions\Modifiers\MultDeltaModifier.cs" />
     <Compile Include="Assets\Scripts\Exceptions\Modifiers\MultValueModifier.cs" />
     <Compile Include="Assets\Scripts\Exceptions\Modifiers\ValueModifier.cs" />
     <Compile Include="Assets\Scripts\Exceptions\ValueChangeException.cs" />
     <Compile Include="Assets\Scripts\Extensions\DirectionsExtensions.cs" />
+    <Compile Include="Assets\Scripts\Extensions\GameObjectExtensions.cs" />
     <Compile Include="Assets\Scripts\Extensions\RectTransformAnimationExtensions.cs" />
     <Compile Include="Assets\Scripts\Model\ConversationData.cs" />
     <Compile Include="Assets\Scripts\Model\LevelData.cs" />
@@ -144,6 +147,8 @@
     <Compile Include="Assets\Scripts\ViewModel Component\Board.cs" />
     <Compile Include="Assets\Scripts\ViewModel Component\CameraRig.cs" />
     <Compile Include="Assets\Scripts\ViewModel Component\ConversationPanel.cs" />
+    <Compile Include="Assets\Scripts\ViewModel Component\Features\AddPoisonStatusFeature.cs" />
+    <Compile Include="Assets\Scripts\ViewModel Component\Features\AddStatusFeature.cs" />
     <Compile Include="Assets\Scripts\ViewModel Component\Features\Feature.cs" />
     <Compile Include="Assets\Scripts\ViewModel Component\Features\StatModifierFeature.cs" />
     <Compile Include="Assets\Scripts\ViewModel Component\Item\Consumable.cs" />
@@ -154,6 +159,14 @@
     <Compile Include="Assets\Scripts\ViewModel Component\Movement\TeleportMovement.cs" />
     <Compile Include="Assets\Scripts\ViewModel Component\Movement\WalkMovement.cs" />
     <Compile Include="Assets\Scripts\ViewModel Component\StatPanel.cs" />
+    <Compile Include="Assets\Scripts\ViewModel Component\Status\Conditions\DurationStatusCondition.cs" />
+    <Compile Include="Assets\Scripts\ViewModel Component\Status\Conditions\StatusCondition.cs" />
+    <Compile Include="Assets\Scripts\ViewModel Component\Status\Effects\HasteStatusEffect.cs" />
+    <Compile Include="Assets\Scripts\ViewModel Component\Status\Effects\PoisonStatusEffect.cs" />
+    <Compile Include="Assets\Scripts\ViewModel Component\Status\Effects\SlowStatusEffect.cs" />
+    <Compile Include="Assets\Scripts\ViewModel Component\Status\Effects\StatusEffect.cs" />
+    <Compile Include="Assets\Scripts\ViewModel Component\Status\Effects\StopStatusEffect.cs" />
+    <Compile Include="Assets\Scripts\ViewModel Component\Status\Status.cs" />
     <Compile Include="Assets\Scripts\ViewModel Component\Tile.cs" />
     <Compile Include="Assets\Scripts\ViewModel Component\Unit.cs" />
     <Reference Include="UnityEditor.StandardEvents">
