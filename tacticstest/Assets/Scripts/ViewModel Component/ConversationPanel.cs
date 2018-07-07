@@ -11,15 +11,15 @@ public class ConversationPanel : MonoBehaviour
 
     void Start()
     {
-        //animate dialogue arrow up and down loop
+        //animate dialogue arrow
         Vector3 pos = arrow.transform.localPosition;
         arrow.transform.localPosition = new Vector3(pos.x, pos.y + 5, pos.z);
         Tweener t = arrow.transform.MoveToLocal(new Vector3(pos.x, pos.y - 5, pos.z), 0.5f, EasingEquations.EaseInQuad);
-        t.easingControl.loopType = EasingControl.LoopType.PingPong;
-        t.easingControl.loopCount = -1;
+        t.loopType = EasingControl.LoopType.PingPong;
+        t.loopCount = -1;
     }
 
-    //move through method based on fire events
+    //navigate through onfire events
     public IEnumerator Display(SpeakerData sd)
     {
         speaker.sprite = sd.speaker;

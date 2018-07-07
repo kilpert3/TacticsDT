@@ -52,6 +52,8 @@ public class InitBattleState : BattleState
 
             //    Rank rank = instance.AddComponent<Rank>();
             //    rank.Init (10);
+            instance.AddComponent<Health>();
+            instance.AddComponent<Mana>();
         }
     }
 }

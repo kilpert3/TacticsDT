@@ -15,6 +15,7 @@ public class BattleController : StateMachine
     public List<Unit> units = new List<Unit>();
     public StatPanelController statPanelController;
     public IEnumerator round;
+    public HitSuccessIndicator hitSuccessIndicator;
 
     //PROTOTYPE ONLY (actual models thru resources.load())
     public GameObject heroPrefab;

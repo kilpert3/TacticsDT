@@ -17,29 +17,35 @@ public class PerformAbilityState : BattleState
         // TODO play animations, etc
         yield return null;
         // TODO apply ability effect, etc
-        TemporaryAttackExample();
+        ApplyAbility();
 
         if (turn.hasUnitMoved)
             owner.ChangeState<EndFacingState>();
         else
             owner.ChangeState<CommandSelectionState>();
     }
-    
-    //PLACEHOLDER
-    //in the future, do not directly do the work of an Ability’s Effect in this state.
-    //Instead, have another class per effect, similar to the implementation of item Feature components.
-    //have the final implementation loop through the effects and targets and attempt to apply the effect on each target.
-    void TemporaryAttackExample()
+
+    void ApplyAbility()
     {
+        BaseAbilityEffect[] effects = turn.ability.GetComponentsInChildren<BaseAbilityEffect>();
         for (int i = 0; i < turn.targets.Count; ++i)
         {
-            GameObject obj = turn.targets[i].content;
-            Stats stats = obj != null ? obj.GetComponentInChildren<Stats>() : null;
-            if (stats != null)
+            Tile target = turn.targets[i];
+            for (int j = 0; j < effects.Length; ++j)
             {
-                stats[StatTypes.HP] -= 50;
-                if (stats[StatTypes.HP] <= 0)
-                    Debug.Log("KO'd Uni!", obj);
+                BaseAbilityEffect effect = effects[j];
+                AbilityEffectTarget targeter = effect.GetComponent<AbilityEffectTarget>();
+                if (targeter.IsTarget(target))
+                {
+                    HitRate rate = effect.GetComponent<HitRate>();
+                    int chance = rate.Calculate(target);
+                    if (UnityEngine.Random.Range(0, 101) > chance)
+                    {
+                        // A Miss!
+                        continue;
+                    }
+                    effect.Apply(target);
+                }
             }
         }
     }

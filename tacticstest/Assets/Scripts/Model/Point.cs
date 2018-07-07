@@ -1,21 +1,24 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using System;
+using System.Collections;
 
 [System.Serializable]
-public struct Point {
-
+public struct Point : IEquatable<Point>
+{
+    #region Fields
     public int x;
     public int y;
+    #endregion
 
-    //constructor
+    #region Constructors
     public Point(int x, int y)
     {
         this.x = x;
         this.y = y;
     }
+    #endregion
 
-    //overload operators
+    #region Operator Overloads
     public static Point operator +(Point a, Point b)
     {
         return new Point(a.x + b.x, a.y + b.y);
@@ -36,7 +39,13 @@ public struct Point {
         return !(a == b);
     }
 
-    //must override since == operator was overloaded
+    public static implicit operator Vector2(Point p)
+    {
+        return new Vector2(p.x, p.y);
+    }
+    #endregion
+
+    #region Object Overloads
     public override bool Equals(object obj)
     {
         if (obj is Point)
@@ -57,9 +66,9 @@ public struct Point {
         return x ^ y;
     }
 
-    //log points for easy debugging
     public override string ToString()
     {
         return string.Format("({0},{1})", x, y);
     }
+    #endregion
 }

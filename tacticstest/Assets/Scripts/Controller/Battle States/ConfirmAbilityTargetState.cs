@@ -7,6 +7,7 @@ public class ConfirmAbilityTargetState : BattleState
     List<Tile> tiles;
     AbilityArea aa;
     int index = 0;
+    AbilityEffectTarget[] targeters;
 
     public override void Enter()
     {
@@ -17,6 +18,11 @@ public class ConfirmAbilityTargetState : BattleState
         FindTargets();
         RefreshPrimaryStatPanel(turn.actor.tile.pos);
         SetTarget(0);
+        if (turn.targets.Count > 0)
+        {
+            hitSuccessIndicator.Show();
+            SetTarget(0);
+        }
     }
 
     public override void Exit()
@@ -25,6 +31,7 @@ public class ConfirmAbilityTargetState : BattleState
         board.DeSelectTiles(tiles);
         statPanelController.HidePrimary();
         statPanelController.HideSecondary();
+        hitSuccessIndicator.Hide();
     }
 
     protected override void OnMove(object sender, InfoEventArgs<Point> e)
@@ -51,7 +58,7 @@ public class ConfirmAbilityTargetState : BattleState
     void FindTargets()
     {
         turn.targets = new List<Tile>();
-        AbilityEffectTarget[] targeters = turn.ability.GetComponentsInChildren<AbilityEffectTarget>();
+        targeters = turn.ability.GetComponentsInChildren<AbilityEffectTarget>();
         for (int i = 0; i < tiles.Count; ++i)
             if (IsTarget(tiles[i], targeters))
                 turn.targets.Add(tiles[i]);
@@ -73,7 +80,35 @@ public class ConfirmAbilityTargetState : BattleState
             index = turn.targets.Count - 1;
         if (index >= turn.targets.Count)
             index = 0;
+
         if (turn.targets.Count > 0)
+        {
             RefreshSecondaryStatPanel(turn.targets[index].pos);
+            UpdateHitSuccessIndicator();
+        }
     }
+
+    void UpdateHitSuccessIndicator()
+    {
+        int chance = 0;
+        int amount = 0;
+        Tile target = turn.targets[index];
+
+        for (int i = 0; i < targeters.Length; ++i)
+        {
+            if (targeters[i].IsTarget(target))
+            {
+                HitRate hitRate = targeters[i].GetComponent<HitRate>();
+                chance = hitRate.Calculate(target);
+
+                BaseAbilityEffect effect = targeters[i].GetComponent<BaseAbilityEffect>();
+                amount = effect.Predict(target);
+                break;
+            }
+        }
+
+        hitSuccessIndicator.SetStats(chance, amount);
+    }
+
+
 }

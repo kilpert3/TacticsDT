@@ -15,7 +15,7 @@ public class Turn
     Tile startTile;
     Directions startDir;
 
-    public GameObject ability; //the selected ability
+    public Ability ability; //the selected ability
     public List<Tile> targets; //list of targets within ability range
 
     public void Change(Unit current)

@@ -4,25 +4,27 @@ using System.Collections;
 
 public class ConversationController : MonoBehaviour
 {
+    #region Events
+    public static event EventHandler completeEvent;
+    #endregion
 
-    [SerializeField] ConversationPanel leftPanel;
-    [SerializeField] ConversationPanel rightPanel;
-
-    //for toggling canvas on/off
-    Canvas canvas;
-
-    IEnumerator conversation;
-
-    //for animating panel on or off screen
-    Tweener transition;
-
-    //strings to specify panel positions
+    #region Const
     const string ShowTop = "Show Top";
     const string ShowBottom = "Show Bottom";
     const string HideTop = "Hide Top";
     const string HideBottom = "Hide Bottom";
+    #endregion
 
-    //connect some references, set the default off screen position for both panels, and disable the canvas(until it is needed).
+    #region Fields
+    [SerializeField] ConversationPanel leftPanel;
+    [SerializeField] ConversationPanel rightPanel;
+
+    Canvas canvas;
+    IEnumerator conversation;
+    Tweener transition;
+    #endregion
+
+    #region MonoBehaviour
     void Start()
     {
         canvas = GetComponentInChildren<Canvas>();
@@ -32,11 +34,9 @@ public class ConversationController : MonoBehaviour
             rightPanel.panel.SetPosition(HideBottom, false);
         canvas.gameObject.SetActive(false);
     }
+    #endregion
 
-    //event when conversation is finished
-    public static event EventHandler completeEvent;
-
-    //dialogue handling
+    #region Public
     public void Show(ConversationData data)
     {
         canvas.gameObject.SetActive(true);
@@ -51,8 +51,9 @@ public class ConversationController : MonoBehaviour
 
         conversation.MoveNext();
     }
+    #endregion
 
-    //loops through each speaker and message
+    #region Private
     IEnumerator Sequence(ConversationData data)
     {
         for (int i = 0; i < data.list.Count; ++i)
@@ -83,7 +84,7 @@ public class ConversationController : MonoBehaviour
                 yield return null;
 
             MovePanel(currentPanel, hide);
-            transition.easingControl.completedEvent += delegate (object sender, EventArgs e) {
+            transition.completedEvent += delegate (object sender, EventArgs e) {
                 conversation.MoveNext();
             };
 
@@ -95,11 +96,11 @@ public class ConversationController : MonoBehaviour
             completeEvent(this, EventArgs.Empty);
     }
 
-    //move panels away after finishing
     void MovePanel(ConversationPanel obj, string pos)
     {
         transition = obj.panel.SetPosition(pos, true);
-        transition.easingControl.duration = 0.5f;
-        transition.easingControl.equation = EasingEquations.EaseOutQuad;
+        transition.duration = 0.5f;
+        transition.equation = EasingEquations.EaseOutQuad;
     }
+    #endregion
 }

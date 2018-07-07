@@ -4,8 +4,7 @@ using System.Collections.Generic;
 
 public class WalkMovement : Movement
 {
-    //movement for basic land units
-
+    #region Protected
     protected override bool ExpandSearch(Tile from, Tile to)
     {
         // Skip if the distance in height between the two tiles is more than the unit can jump
@@ -19,7 +18,6 @@ public class WalkMovement : Movement
         return base.ExpandSearch(from, to);
     }
 
-    //animation handling
     public override IEnumerator Traverse(Tile tile)
     {
         unit.Place(tile);
@@ -51,7 +49,9 @@ public class WalkMovement : Movement
 
         yield return null;
     }
+    #endregion
 
+    #region Private
     IEnumerator Walk(Tile target)
     {
         Tweener tweener = transform.MoveTo(target.center, 0.5f, EasingEquations.Linear);
@@ -63,11 +63,12 @@ public class WalkMovement : Movement
     {
         Tweener tweener = transform.MoveTo(to.center, 0.5f, EasingEquations.Linear);
 
-        Tweener t2 = jumper.MoveToLocal(new Vector3(0, Tile.stepHeight * 2f, 0), tweener.easingControl.duration / 2f, EasingEquations.EaseOutQuad);
-        t2.easingControl.loopCount = 1;
-        t2.easingControl.loopType = EasingControl.LoopType.PingPong;
+        Tweener t2 = jumper.MoveToLocal(new Vector3(0, Tile.stepHeight * 2f, 0), tweener.duration / 2f, EasingEquations.EaseOutQuad);
+        t2.loopCount = 1;
+        t2.loopType = EasingControl.LoopType.PingPong;
 
         while (tweener != null)
             yield return null;
     }
+    #endregion
 }
