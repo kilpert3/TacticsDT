@@ -28,6 +28,7 @@ public class LineAbilityRange : AbilityRange
                 break;
         }
 
+        int dist = 0;
         while (startPos != endPos)
         {
             if (startPos.x < endPos.x) startPos.x++;
@@ -39,6 +40,10 @@ public class LineAbilityRange : AbilityRange
             Tile t = board.GetTile(startPos);
             if (t != null && Mathf.Abs(t.height - unit.tile.height) <= vertical)
                 retValue.Add(t);
+
+            dist++;
+            if (dist >= horizontal)
+                break;
         }
 
         return retValue;

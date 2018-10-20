@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+//Select next unit in the round order
+//NEXT: CommandSelectionState
 public class SelectUnitState : BattleState
 {
     public override void Enter()

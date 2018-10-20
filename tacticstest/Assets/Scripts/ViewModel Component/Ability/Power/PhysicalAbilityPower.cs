@@ -3,20 +3,24 @@ using System.Collections;
 
 public class PhysicalAbilityPower : BaseAbilityPower
 {
-    public int level;
+    public int rolls;
+    public int d;
 
-    protected override int GetBaseAttack()
+    protected override int GetBaseDamageModifier()
     {
-        return GetComponentInParent<Stats>()[StatTypes.ATK];
+        return GetComponentInParent<Stats>().getModifier(StatTypes.STR);
     }
 
-    protected override int GetBaseDefense(Unit target)
+    protected override int GetBaseDamageReduction(Unit target)
     {
-        return target.GetComponent<Stats>()[StatTypes.DEF];
+        return target.GetComponent<Stats>()[StatTypes.DR];
     }
 
-    protected override int GetPower()
+    protected override int GetDamageRoll()
     {
-        return level;
+        int total = 0;
+        for (int i = 0; i < rolls; i++)
+            total += Random.Range(1, d);
+        return total;
     }
 }

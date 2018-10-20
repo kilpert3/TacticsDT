@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class TurnOrderController : MonoBehaviour
 {
+
     #region Constants
     const int turnActivation = 1000;
     const int turnCost = 500;
@@ -19,12 +20,21 @@ public class TurnOrderController : MonoBehaviour
     public const string TurnBeganNotification = "TurnOrderController.TurnBeganNotification";
     #endregion
 
+    public DiceBag diceBag;
+    public BattleController bc;
+    public List<Unit> units;
+
+    
+    private void Start()
+    {
+        diceBag = new DiceBag();  
+    }
+
     //no coroutine - step by completing combat rounds
     #region Public
     public IEnumerator Round()
     {
         BattleController bc = GetComponent<BattleController>(); ;
-        //infinite loop rounds
         while (true)
         {
             this.PostNotification(RoundBeganNotification);
@@ -33,10 +43,10 @@ public class TurnOrderController : MonoBehaviour
             for (int i = 0; i < units.Count; ++i)
             {
                 Stats s = units[i].GetComponent<Stats>();
-                s[StatTypes.CTR] += s[StatTypes.SPD];
+                s[StatTypes.INIT] += s[StatTypes.AGL];
             }
 
-            units.Sort((a, b) => GetCounter(a).CompareTo(GetCounter(b)));
+            units.Sort((a, b) => GetInitiative(a).CompareTo(GetInitiative(b)));
 
             for (int i = units.Count - 1; i >= 0; --i)
             {
@@ -44,7 +54,7 @@ public class TurnOrderController : MonoBehaviour
                 {
                     bc.turn.Change(units[i]);
                     units[i].PostNotification(TurnBeganNotification);
-                    //pause execution, give control back to battle states
+
                     yield return units[i];
 
                     int cost = turnCost;
@@ -54,7 +64,7 @@ public class TurnOrderController : MonoBehaviour
                         cost += actionCost;
 
                     Stats s = units[i].GetComponent<Stats>();
-                    s.SetValue(StatTypes.CTR, s[StatTypes.CTR] - cost, false);
+                    s.SetValue(StatTypes.INIT, s[StatTypes.INIT] - cost, false);
 
                     units[i].PostNotification(TurnCompletedNotification);
                 }
@@ -68,14 +78,14 @@ public class TurnOrderController : MonoBehaviour
     #region Private
     bool CanTakeTurn(Unit target)
     {
-        BaseException exc = new BaseException(GetCounter(target) >= turnActivation);
+        BaseException exc = new BaseException(GetInitiative(target) >= turnActivation);
         target.PostNotification(TurnCheckNotification, exc);
         return exc.toggle;
     }
 
-    int GetCounter(Unit target)
+    int GetInitiative(Unit target)
     {
-        return target.GetComponent<Stats>()[StatTypes.CTR];
+        return target.GetComponent<Stats>()[StatTypes.INIT];
     }
     #endregion
 }

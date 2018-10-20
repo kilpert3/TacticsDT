@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public class Stats : MonoBehaviour
 {
+    private static int statBase = 8;
+
     // Align stat type to int with indexer
     public int this[StatTypes s]
     {
@@ -58,5 +60,12 @@ public class Stats : MonoBehaviour
 
         _data[(int)type] = value;
         this.PostNotification(DidChangeNotification(type), oldValue);
+    }
+
+    //calculate the modifier based on the stats chart document formula (Warning: hard coded value)
+    public int getModifier(StatTypes type)
+    {
+        int mod = (this[type] - statBase) / 2;
+        return mod;
     }
 }

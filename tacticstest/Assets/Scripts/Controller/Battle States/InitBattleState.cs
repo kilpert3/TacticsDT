@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
+//INITIALIZE BATTLE
 public class InitBattleState : BattleState
 {
     public override void Enter()
@@ -15,45 +17,54 @@ public class InitBattleState : BattleState
         board.Load(levelData);
         Point p = new Point((int)levelData.tiles[0].x, (int)levelData.tiles[0].z);
         SelectTile(p);
-        SpawnTestUnits(); //  PROTOTYPE
+        SpawnTestUnits(); //  Dummy method for testing
+        AddVictoryCondition(); //  victory condition testing
         yield return null;
-        owner.ChangeState<CutSceneState>(); // This is changed for prototyping
+        owner.ChangeState<CutSceneState>(); // Enter Test cutscene at start
         owner.round = owner.gameObject.AddComponent<TurnOrderController>().Round();
     }
 
-    //PROTOTYPE ONLY
+    //CODE FOR TESTING ONLY, creates units manually
     void SpawnTestUnits()
     {
-        string[] jobs = new string[] { "Rogue", "Warrior", "Wizard" };
-        for (int i = 0; i < jobs.Length; ++i)
+        string[] recipes = new string[]
         {
-            GameObject instance = Instantiate(owner.heroPrefab) as GameObject;
+            "Alaois",
+            "Hania",
+            "Kamau",
+            "Enemy Rogue",
+            "Enemy Warrior",
+            "Enemy Wizard"
+        };
 
-            Stats s = instance.AddComponent<Stats>();
-            s[StatTypes.LVL] = 1;
+        List<Tile> locations = new List<Tile>(board.tiles.Values);
+        for (int i = 0; i < recipes.Length; ++i)
+        {
+            int level = 1;
+            GameObject instance = UnitFactory.Create(recipes[i], level);
 
-            GameObject jobPrefab = Resources.Load<GameObject>("Jobs/" + jobs[i]);
-            GameObject jobInstance = Instantiate(jobPrefab) as GameObject;
-            jobInstance.transform.SetParent(instance.transform);
-
-            Job job = jobInstance.GetComponent<Job>();
-            job.Employ();
-            job.LoadDefaultStats();
-
-            Point p = new Point((int)levelData.tiles[i].x, (int)levelData.tiles[i].z);
+            int random = UnityEngine.Random.Range(0, locations.Count);
+            Tile randomTile = locations[random];
+            locations.RemoveAt(random);
 
             Unit unit = instance.GetComponent<Unit>();
-            unit.Place(board.GetTile(p));
+            unit.Place(randomTile);
+            unit.dir = (Directions)UnityEngine.Random.Range(0, 4);
             unit.Match();
 
-            instance.AddComponent<WalkMovement>();
-
             units.Add(unit);
-
-            //    Rank rank = instance.AddComponent<Rank>();
-            //    rank.Init (10);
-            instance.AddComponent<Health>();
-            instance.AddComponent<Mana>();
         }
+
+        SelectTile(units[0].tile.pos);
+    }
+
+    //MORE TEST CODE
+    void AddVictoryCondition()
+    {
+        DefeatBossVictoryCondition vc = owner.gameObject.AddComponent<DefeatBossVictoryCondition>();
+        Unit enemy = units[units.Count - 1];
+        vc.target = enemy;
+        Health health = enemy.GetComponent<Health>();
+        health.MinHP = 1;
     }
 }

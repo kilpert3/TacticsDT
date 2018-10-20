@@ -27,8 +27,20 @@ public class ConversationPanel : MonoBehaviour
 
         for (int i = 0; i < sd.messages.Count; ++i)
         {
-            message.text = sd.messages[i];
+            //message.text = sd.messages[i];
+            StartCoroutine(typeSentence(sd.messages[i]));
             arrow.SetActive(i + 1 < sd.messages.Count);
+            yield return null;
+        }
+    }
+
+    IEnumerator typeSentence(string sentence)
+    {
+        message.text = "";
+        foreach(char letter in sentence.ToCharArray())
+        {
+            message.text += letter;
+            
             yield return null;
         }
     }

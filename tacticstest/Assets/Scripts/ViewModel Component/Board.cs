@@ -5,6 +5,7 @@ using System;
 
 public class Board : MonoBehaviour
 {
+    #region fields
     [SerializeField] GameObject tilePrefab;
     public Dictionary<Point, Tile> tiles = new Dictionary<Point, Tile>();
 
@@ -26,6 +27,7 @@ public class Board : MonoBehaviour
         new Point(1, 0),
         new Point(-1, 0)
     };
+    #endregion
 
     public void Load(LevelData data)
     {
@@ -35,6 +37,7 @@ public class Board : MonoBehaviour
         for (int i = 0; i < data.tiles.Count; ++i)
         {
             GameObject instance = Instantiate(tilePrefab) as GameObject;
+            instance.transform.SetParent(transform);    //parent to board for cleaner hierarchy
             Tile t = instance.GetComponent<Tile>();
             t.Load(data.tiles[i]);
             tiles.Add(t.pos, t);
@@ -47,7 +50,7 @@ public class Board : MonoBehaviour
         }
     }
 
-    //MAIN PATHFINDING
+    //Search used for pathfinding
     public List<Tile> Search(Tile start, Func<Tile, Tile, bool> addTile)
     {
         List<Tile> retValue = new List<Tile>();

@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-//determines how EXP relates to LVL (Ease in Quad curve)
 public class Rank : MonoBehaviour
 {
     #region Consts

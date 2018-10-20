@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+//success partially determined by defender evade stat
 public class ATypeHitRate : HitRate
 {
     public override int Calculate(Tile target)
@@ -22,7 +23,10 @@ public class ATypeHitRate : HitRate
     int GetEvade(Unit target)
     {
         Stats s = target.GetComponentInParent<Stats>();
-        return Mathf.Clamp(s[StatTypes.EVD], 0, 100);
+        int evd = s.getModifier(StatTypes.EVD);
+        evd *= 5;
+        evd += 40;
+        return Mathf.Clamp(evd, 0, 100);
     }
 
     int AdjustForRelativeFacing(Unit target, int rate)

@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f12707055f83e154d9fd1b46dc4cf44f, type: 3}
+  m_Name: OutroSceneWin
+  m_EditorClassIdentifier: 
+  list:
+  - messages:
+    - Damn... Not enough after all...
+    - Grrah!
+    speaker: {fileID: 21300000, guid: 7fd14989ac1d03d4888a09d892053dda, type: 3}
+    anchor: 8
+  - messages:
+    - Fool. It always ends this way.
+    - Bah! I've wasted enough time already.
+    - Ahh, but the end is close, I can feel it!
+    - Hahahahaha!
+    speaker: {fileID: 21300000, guid: 2a51e3845e219984abacb14a4c4cd6d8, type: 3}
+    anchor: 6
+  - messages:
+    - YOU WIN
+    speaker: {fileID: 0}
+    anchor: 7

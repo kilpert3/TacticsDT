@@ -12,7 +12,10 @@ public abstract class BaseAbilityMenuState : BattleState
     {
         base.Enter();
         SelectTile(turn.actor.tile.pos);
-        LoadMenu();
+
+        //load game menu for player units only
+        if (driver.Current == Drivers.Human)
+            LoadMenu();
     }
 
     public override void Exit()

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-//blinded effect modifies hit rates
+//blinded effect modifies hit rates when attacking.
 public class BlindStatusEffect : StatusEffect
 {
     void OnEnable()
@@ -20,12 +20,12 @@ public class BlindStatusEffect : StatusEffect
         Unit owner = GetComponentInParent<Unit>();
         if (owner == info.arg0)
         {
-            // The attacker is blind
+            //Bonus to hit when (The attacker is blind)
             info.arg2 += 50;
         }
         else if (owner == info.arg1)
         {
-            // The defender is blind
+            //Penalty to hit others when blinded (The defender is blind)
             info.arg2 -= 20;
         }
     }

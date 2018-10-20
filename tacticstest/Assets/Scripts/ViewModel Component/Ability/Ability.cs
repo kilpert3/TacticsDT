@@ -38,4 +38,16 @@ public class Ability : MonoBehaviour
             effect.Apply(target);
         }
     }
+
+    public bool IsTarget(Tile tile)
+    {
+        Transform obj = transform;
+        for (int i = 0; i < obj.childCount; ++i)
+        {
+            AbilityEffectTarget targeter = obj.GetChild(i).GetComponent<AbilityEffectTarget>();
+            if (targeter.IsTarget(tile))
+                return true;
+        }
+        return false;
+    }
 }

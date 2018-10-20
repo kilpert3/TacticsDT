@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public abstract class BattleState : State
 {
+    #region Fields
     protected BattleController owner;
     public CameraRig cameraRig { get { return owner.cameraRig; } }
     public Board board { get { return owner.board; } }
@@ -15,6 +16,17 @@ public abstract class BattleState : State
     public Turn turn { get { return owner.turn; } }
     public List<Unit> units { get { return owner.units; } }
     public HitSuccessIndicator hitSuccessIndicator { get { return owner.hitSuccessIndicator; } }
+    public FacingIndicator facingIndicator { get { return owner.facingIndicator; } }
+
+    protected Driver driver;
+    #endregion
+
+
+    public override void Enter()
+    {
+        driver = (turn.actor != null) ? turn.actor.GetComponent<Driver>() : null;
+        base.Enter();
+    }
 
     protected virtual void Awake()
     {
@@ -23,8 +35,12 @@ public abstract class BattleState : State
 
     protected override void AddListeners()
     {
-        InputController.moveEvent += OnMove;
-        InputController.fireEvent += OnFire;
+        //only add input listener for player controlled units
+        if (driver == null || driver.Current == Drivers.Human)
+        {
+            InputController.moveEvent += OnMove;
+            InputController.fireEvent += OnFire;
+        }
     }
 
     protected override void RemoveListeners()
@@ -80,6 +96,17 @@ public abstract class BattleState : State
             statPanelController.ShowSecondary(target.gameObject);
         else
             statPanelController.HideSecondary();
+    }
+
+    //determine battle ending
+    protected virtual bool DidPlayerWin()
+    {
+        return owner.GetComponent<BaseVictoryCondition>().Victor == Factions.Hero;
+    }
+
+    protected virtual bool IsBattleOver()
+    {
+        return owner.GetComponent<BaseVictoryCondition>().Victor != Factions.None;
     }
 
 }

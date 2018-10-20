@@ -2,7 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 
-//choose from actions: attack, item, ability, magic, etc
+//PREV: CommandSelectionState
+//choose from ability catalog actions: attack, item, ability, magic, etc
+//NEXT: AbilityTargetState
 public class CategorySelectionState : BaseAbilityMenuState
 {
     //Define menu options

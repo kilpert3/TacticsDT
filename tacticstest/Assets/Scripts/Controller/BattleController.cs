@@ -16,11 +16,14 @@ public class BattleController : StateMachine
     public StatPanelController statPanelController;
     public IEnumerator round;
     public HitSuccessIndicator hitSuccessIndicator;
+    public FacingIndicator facingIndicator;
 
-    //PROTOTYPE ONLY (actual models thru resources.load())
-    public GameObject heroPrefab;
+    public BattleMessageController battleMessageController;
+    public ComputerPlayer cpu;
+
     public Tile currentTile { get { return board.GetTile(pos); } }
 
+    //Start battle by changing to InitBattleState
     void Start()
     {
         ChangeState<InitBattleState>();

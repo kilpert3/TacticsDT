@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//ATTACH TO BATTLECONTROLLER
+
+//handle user input
 public class InputController : MonoBehaviour {
 
 	

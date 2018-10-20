@@ -21,9 +21,21 @@ public class CutSceneState : BattleState
             Resources.UnloadAsset(data);
     }
 
+    //currently hardcoded for testing
     public override void Enter()
     {
         base.Enter();
+        if (IsBattleOver())
+        {
+            if (DidPlayerWin())
+                data = Resources.Load<ConversationData>("Conversations/OutroSceneWin");
+            else
+                data = Resources.Load<ConversationData>("Conversations/OutroSceneLose");
+        }
+        else
+        {
+            data = Resources.Load<ConversationData>("Conversations/IntroScene");
+        }
         conversationController.Show(data);
     }
 
@@ -45,8 +57,12 @@ public class CutSceneState : BattleState
         conversationController.Next();
     }
 
+    //switch state after finishing
     void OnCompleteConversation(object sender, System.EventArgs e)
     {
-        owner.ChangeState<SelectUnitState>();
+        if (IsBattleOver())
+            owner.ChangeState<EndBattleState>();
+        else
+            owner.ChangeState<SelectUnitState>();
     }
 }

@@ -2,6 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 
+//PREV: AbilityTargetState
+//display predicted combat outcome, confirm ability action
+//NEXT: PerformAbilityState
 public class ConfirmAbilityTargetState : BattleState
 {
     List<Tile> tiles;
@@ -20,9 +23,22 @@ public class ConfirmAbilityTargetState : BattleState
         SetTarget(0);
         if (turn.targets.Count > 0)
         {
-            hitSuccessIndicator.Show();
+            //only show indicator for player units
+            if (driver.Current == Drivers.Human)
+                hitSuccessIndicator.Show();
             SetTarget(0);
         }
+
+        // Only show this UI for AI controlled units
+        if (driver.Current == Drivers.Computer)
+            StartCoroutine(ComputerDisplayAbilitySelection());
+    }
+
+    IEnumerator ComputerDisplayAbilitySelection()
+    {
+        owner.battleMessageController.Display(turn.ability.name);
+        yield return new WaitForSeconds(2f);
+        owner.ChangeState<PerformAbilityState>();
     }
 
     public override void Exit()

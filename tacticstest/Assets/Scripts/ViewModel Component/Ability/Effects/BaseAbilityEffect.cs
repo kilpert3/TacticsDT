@@ -8,9 +8,9 @@ public abstract class BaseAbilityEffect : MonoBehaviour
     protected const int minDamage = -999;
     protected const int maxDamage = 999;
 
-    public const string GetAttackNotification = "BaseAbilityEffect.GetAttackNotification";
-    public const string GetDefenseNotification = "BaseAbilityEffect.GetDefenseNotification";
-    public const string GetPowerNotification = "BaseAbilityEffect.GetPowerNotification";
+    public const string GetDamageModifierNotification = "BaseAbilityEffect.GetDamageModifierNotification";
+    public const string GetDamageReductionNotification = "BaseAbilityEffect.GetDamageReductionNotification";
+    public const string GetDamageRollNotification = "BaseAbilityEffect.GetDamageRollNotification";
     public const string TweakDamageNotification = "BaseAbilityEffect.TweakDamageNotification";
 
     public const string MissedNotification = "BaseAbilityEffect.MissedNotification";
@@ -37,7 +37,7 @@ public abstract class BaseAbilityEffect : MonoBehaviour
     //actual effect application method
     protected abstract int OnApply(Tile target);
 
-    //
+    //posts a notification and returns a stat after applying all listening modifiers
     protected virtual int GetStat(Unit attacker, Unit target, string notification, int startValue)
     {
         var mods = new List<ValueModifier>();

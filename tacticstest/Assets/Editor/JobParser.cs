@@ -18,6 +18,7 @@ public static class JobParser
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
     }
+
     //new jobs location
     static void CreateDirectories()
     {
@@ -43,10 +44,10 @@ public static class JobParser
             job.baseStats[i - 1] = Convert.ToInt32(elements[i]);
 
         StatModifierFeature evade = GetFeature(obj, StatTypes.EVD);
-        evade.amount = Convert.ToInt32(elements[8]);
+        evade.amount = (Convert.ToInt32(elements[5]) - 8) / 2;
 
         StatModifierFeature res = GetFeature(obj, StatTypes.RES);
-        res.amount = Convert.ToInt32(elements[9]);
+        res.amount = (Convert.ToInt32(elements[8]) - 8) / 2;
 
         StatModifierFeature move = GetFeature(obj, StatTypes.MOV);
         move.amount = Convert.ToInt32(elements[10]);

@@ -8,4 +8,6 @@ public class InfiniteAbilityRange : AbilityRange
     {
         return new List<Tile>(board.tiles.Values);
     }
+
+    public override bool positionOriented { get { return false; } }
 }

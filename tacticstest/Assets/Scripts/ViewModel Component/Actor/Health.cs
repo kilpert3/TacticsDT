@@ -3,7 +3,8 @@ using System.Collections;
 
 public class Health : MonoBehaviour
 {
-    #region Fields
+    //set hp, mhp, hp minimum
+    #region Fields & Properties
     public int HP
     {
         get { return stats[StatTypes.HP]; }
@@ -16,9 +17,11 @@ public class Health : MonoBehaviour
         set { stats[StatTypes.MHP] = value; }
     }
 
+    public int MinHP = 0;
     Stats stats;
     #endregion
 
+    //get unit stats and add observers to hp
     #region MonoBehaviour
     void Awake()
     {
@@ -38,11 +41,12 @@ public class Health : MonoBehaviour
     }
     #endregion
 
+    //the observers
     #region Event Handlers
     void OnHPWillChange(object sender, object args)
     {
         ValueChangeException vce = args as ValueChangeException;
-        vce.AddModifier(new ClampValueModifier(int.MaxValue, 0, stats[StatTypes.MHP]));
+        vce.AddModifier(new ClampValueModifier(int.MaxValue, MinHP, stats[StatTypes.MHP]));
     }
 
     void OnMHPDidChange(object sender, object args)
@@ -51,7 +55,7 @@ public class Health : MonoBehaviour
         if (MHP > oldMHP)
             HP += MHP - oldMHP;
         else
-            HP = Mathf.Clamp(HP, 0, MHP);
+            HP = Mathf.Clamp(HP, MinHP, MHP);
     }
     #endregion
 }

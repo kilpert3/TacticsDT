@@ -9,13 +9,18 @@ public class Job : MonoBehaviour
     #region Fields / Properties
     public static readonly StatTypes[] statOrder = new StatTypes[]
     {
-    StatTypes.MHP,
-    StatTypes.MMP,
-    StatTypes.ATK,
-    StatTypes.DEF,
-    StatTypes.MAT,
-    StatTypes.MDF,
-    StatTypes.SPD
+        StatTypes.MHP,  //1
+        StatTypes.MMP,  //2
+        StatTypes.FOC,  //3
+        StatTypes.STR,  //4
+        StatTypes.AGL,  //5
+        StatTypes.END,  //6
+        StatTypes.INT,  //7
+        StatTypes.RES,  //8
+        StatTypes.CHA,  //9
+        StatTypes.MOV,
+        StatTypes.JMP,
+        StatTypes.SKL
     };
 
     public int[] baseStats = new int[statOrder.Length];
@@ -65,6 +70,9 @@ public class Job : MonoBehaviour
 
         stats.SetValue(StatTypes.HP, stats[StatTypes.MHP], false);
         stats.SetValue(StatTypes.MP, stats[StatTypes.MMP], false);
+        //stats.SetValue(StatTypes.EVD, (8 + stats.getModifier(StatTypes.AGL)), false);
+        //stats.SetValue(StatTypes.MR, stats.getModifier(StatTypes.RES), false);
+        //stats.SetValue(StatTypes.ATK, 1 + stats.getModifier(StatTypes.STR) + stats.getModifier(StatTypes.AGL), false);
     }
     #endregion
 
@@ -74,14 +82,17 @@ public class Job : MonoBehaviour
         int oldValue = (int)args;
         int newValue = stats[StatTypes.LVL];
 
-        for (int i = oldValue; i < newValue; ++i)
-            LevelUp();
+        LevelUp();
     }
     #endregion
 
     #region Private
     void LevelUp()
     {
+        //placeholder implementation
+
+        //growth stats are floats. The whole number is a guaranteed increase, the decimal is a % chance for +1 increase.
+        //E.G 2.5 = +2 guaranteed, with 50% chance for +3 instead
         for (int i = 0; i < statOrder.Length; ++i)
         {
             StatTypes type = statOrder[i];

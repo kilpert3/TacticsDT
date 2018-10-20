@@ -9,15 +9,25 @@ public enum StatTypes
     MHP, // Max Hit Points
     MP,  // Magic Points
     MMP, // Max Magic Points
-    ATK, // Physical Attack
-    DEF, // Physical Defense
-    MAT, // Magic Attack
-    MDF, // Magic Defense
-    EVD, // Evade
-    RES, // Status Resistance
-    SPD, // Speed
+    FOC, // Focus, magic points regenerated per round
+
+    ATK, // Bonus to hit rolls
+    DR,  // Damage Resistance
+    MR,  // Magic Resistance
+    EVD, // Evasion
+
+    STR, // Strength
+    AGL, // Agility
+    END, // Endurance
+    INT, // Intelligence
+    RES, // Resistance
+    CHA, // Charisma
+
     MOV, // Move Range
     JMP, // Jump Height
-    CTR, // Counter - for turn order
+    INIT,// Turn Initiative
+    
+    SKL, // Skill Points
+
     Count
 }

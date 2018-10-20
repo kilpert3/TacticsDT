@@ -7,6 +7,7 @@ public class Tile : MonoBehaviour {
     //step height
     public const float stepHeight = 0.25f;
 
+    #region fields
     //track tile position and height
     public Point pos;
     public int height;
@@ -20,16 +21,21 @@ public class Tile : MonoBehaviour {
     //for pathfinding use (main algorithm in Board.cs)
     [HideInInspector] public Tile prev;
     [HideInInspector] public int distance;
+    #endregion
 
     //correct tile visual after changing the height or position
+    #region Private
     void Match()
     {
         transform.localPosition = new Vector3(pos.x, height * stepHeight / 2f, pos.y);
         transform.localScale = new Vector3(1, height * stepHeight, 1);
     }
-        
-        //used by board generator
-        public void Grow()
+    #endregion
+
+
+    //used by board generator
+    #region public
+    public void Grow()
         {
             height++;
             Match();
@@ -53,5 +59,5 @@ public class Tile : MonoBehaviour {
         {
             Load(new Point((int)v.x, (int)v.z), (int)v.y);
         }
-
+    #endregion
 }

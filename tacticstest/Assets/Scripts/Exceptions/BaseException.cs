@@ -5,7 +5,7 @@ public class BaseException
 {
     //exception for stat interactions
     public bool toggle { get; private set; }
-    private bool defaultToggle;
+    public readonly bool defaultToggle;
 
     public BaseException(bool defaultToggle)
     {

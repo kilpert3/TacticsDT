@@ -18,6 +18,8 @@ public class Turn
     public Ability ability; //the selected ability
     public List<Tile> targets; //list of targets within ability range
 
+    public PlanOfAttack plan; //plan used by AI units
+
     public void Change(Unit current)
     {
         actor = current;
@@ -26,6 +28,7 @@ public class Turn
         lockMove = false;
         startTile = actor.tile;
         startDir = actor.dir;
+        plan = null;
     }
 
     public void UndoMove()
